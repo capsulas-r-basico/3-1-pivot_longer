@@ -1,0 +1,169 @@
+---
+title: "R and databases"
+subtitle: "calidad"
+author: 
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    seal: false
+    #lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: False
+      ratio: '13:9'
+---
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+<img src="imagenes/logo_portada2.png" width="200" />
+
+## INE Educa: Clases abiertas de R
+
+## Tidy data: *pivot_longer()*
+
+## Proyecto Ciencia de Datos
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = TRUE)
+knitr::opts_chunk$set(message = FALSE, warning = F, eval = T, fig.align = "center") 
+options(scipen = "999")
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+library(dplyr)
+library(tidyr)
+
+xaringanExtra::use_panelset()
+
+
+```
+
+
+---
+
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tidy data
+
+En ocasiones necesitamos tranformar la distribuición o formato de nuestros dataframes, desde **wide** a **long**, o viceversa
+
+--
+
+.center[<img src="imagenes/wide_long.png" height="300" />]
+
+--
+
+Para esto el paquete **tidyr** nos ofrece las funciones **pivot_longer()** y **pivot_wider()**
+
+--
+
+En este video revisaremos **pivot_longer()**
+
+
+
+
+
+
+---
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tidy data *pivot_longer()*
+
+
+Esta función incrementa el número de filas y disminuye el número de columnas
+
+--
+
+.center[<img src="imagenes/tidyr-pivot_wider_longer.gif" height="300" />]
+
+--
+
+Los dataframes obtenidos por esta función son más fáciles de **manipular**, pero no de visualizar
+
+--
+
+El formato **long** es especialmente útil para graficar o modelar
+
+---
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tidy data *pivot_longer()*
+
+Ejemplo de `pivot_longer()`:
+
+--
+
+```{r}
+df1 <- data.frame(region = c(1, 2),
+                  hombres = c(100, 200),
+                  mujeres = c(50, 300))
+df1
+```
+
+
+```{r,eval=T}
+library(tidyr)
+
+df1 %>%
+  pivot_longer(cols = -region , names_to = "sexo", values_to = "total_sexo")
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tidy data *pivot_longer()*
+
+## Función `pivot_longer()`
+
+```{r,echo=F}
+df1 %>%
+  pivot_longer(cols = -region , names_to = "sexo", values_to = "total_sexo")
+```
+
+Los argumentos más comunes de esta función son:
+
+--
+
+- *cols*: columnas a las que se le aplicará la operación
+
+--
+
+- *names_to*: indica el nombre de la variable que será creada para "guardar" los
+nombres de las categorías.
+
+
+- *values_to*: indica el nombre de la variable que será 
+creada para "guardar" los valores asociados a las categorías
+
+---
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+<img src="imagenes/logo_portada2.png" width="200" />
+
+
+## INE Educa: Clases abiertas de R
+
+## Proyecto Ciencia de Datos
+
+## Tidy data: *pivot_longer()*
